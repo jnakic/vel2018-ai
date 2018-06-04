@@ -3,8 +3,6 @@ Velocity 2018 Tutorial
 
 ## Prerequisites
 
-### Python3
-
 ### Anaconda
 Download and Install Anaconda Python Interactive Development Environment
 
@@ -12,8 +10,6 @@ Download and Install Anaconda Python Interactive Development Environment
 
 ### Python libraries
 ```
-pip install numpy
-pip install sklearn
 pip install plotly
 ```
 * [More Info About Plotly](https://plot.ly/python/)
@@ -24,12 +20,6 @@ conda install graphviz
 ```
 (If conda is not found - try /anaconda3/bin/conda)
 * [More Info About Graphviz](http://www.graphviz.org/)
-
-```
-pip install -U scikit-learn
-conda install scikit-learn
-```
-* [More Info About scikit](http://scikit-learn.org)
 
 
 
