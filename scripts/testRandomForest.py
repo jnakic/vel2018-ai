@@ -1,8 +1,8 @@
 #######################################################
 # Script:
-#    testDecisionTree.py
+#    testRandomForest.py
 # Usage:
-#    python testDecisionTree.py
+#    python testRandomForest.py
 # Description:
 #    Test the prediction model using test data set
 # Authors:
@@ -13,6 +13,7 @@
 import sys
 import numpy as np
 from sklearn import tree
+from sklearn import ensemble
 from sklearn.externals import joblib
 
 # Enable or disable debug printing
@@ -59,15 +60,13 @@ def getPredictions(data,colList,modelName):
     modelFileName = modelName+".model"
     model = joblib.load(modelFileName)
 
+    print("MODEL: ", model)
     print("NAMES: ", data.dtype.names)
-    print("TREE: ", model.tree_)
-    print("MAX_DEPTH: ", model.tree_.max_depth)
-    print("NODE_COUNT: ", model.tree_.node_count)
-    print("CHILDREN_LEFT: ", model.tree_.children_left)
-    print("CHILDREN_RIGHT: ", model.tree_.children_left)
-    print("FEATURE: ", model.tree_.feature)
-    print("THRESHOLD: ", model.tree_.threshold)
-    print("SCORE values: ", model.score(X,Y))
+    print("FEATURE_IMPORTANCES: ", model.feature_importances_)
+    print("N_FEATURES: ", model.n_features_)
+    print("N_OUTPUTS: ", model.n_outputs_)
+    print("OOB_DECISION_FUNCTION: ", model.oob_decision_function_)
+    print("OOB_SCORE: ", model.oob_score_)
 
     P = model.predict(X)
     print("SCORE values: ", model.score(X,Y))
@@ -113,7 +112,7 @@ def writeResult(output,data,p):
 # Start
 inputFileName = "PerfRun_TestData.csv"
 outputFileName = "PerfRun_TestResult.txt"
-modelName = "PerfRun"
+modelName = "PerfRandomForest"
 
 # All input columns - data types are strings, float and int
 testData = np.genfromtxt(

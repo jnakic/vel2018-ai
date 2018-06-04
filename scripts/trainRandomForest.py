@@ -1,10 +1,10 @@
 #######################################################
 # Script:
-#    testDecisionTree.py
+#    trainRandomForest.py
 # Usage:
-#    python testDecisionTree.py
+#    python trainRandomForest.py
 # Description:
-#    Test the prediction model using test data set
+#    Build the prediction model based on training data
 # Authors:
 #    Jackie Chu,   cchu@salesforce.com
 #    Jasmin Nakic, jnakic@salesforce.com
@@ -13,6 +13,7 @@
 import sys
 import numpy as np
 from sklearn import tree
+from sklearn import ensemble
 from sklearn.externals import joblib
 
 # Enable or disable debug printing
@@ -45,7 +46,7 @@ def addColumns(dest, src, colNames):
     return np.append(dest,tmpArr,1)
 #end addColumns
 
-def getPredictions(data,colList,modelName):
+def genModel(data,colList,modelName):
     # Prepare the data for the model
     X = np.zeros(data.shape[0])
     X = np.reshape(X,(-1,1))
@@ -56,26 +57,28 @@ def getPredictions(data,colList,modelName):
     if debugFlag:
         print("Y 0: ", Y[0:5])
 
-    modelFileName = modelName+".model"
-    model = joblib.load(modelFileName)
+    # Build the model based on training data
+    model = ensemble.RandomForestClassifier(oob_score=True)
+    print(model.fit(X, Y))
 
+    print("MODEL: ", model)
     print("NAMES: ", data.dtype.names)
-    print("TREE: ", model.tree_)
-    print("MAX_DEPTH: ", model.tree_.max_depth)
-    print("NODE_COUNT: ", model.tree_.node_count)
-    print("CHILDREN_LEFT: ", model.tree_.children_left)
-    print("CHILDREN_RIGHT: ", model.tree_.children_left)
-    print("FEATURE: ", model.tree_.feature)
-    print("THRESHOLD: ", model.tree_.threshold)
-    print("SCORE values: ", model.score(X,Y))
+    print("FEATURE_IMPORTANCES: ", model.feature_importances_)
+    print("N_FEATURES: ", model.n_features_)
+    print("N_OUTPUTS: ", model.n_outputs_)
+    print("OOB_DECISION_FUNCTION: ", model.oob_decision_function_)
+    print("OOB_SCORE: ", model.oob_score_)
 
     P = model.predict(X)
     print("SCORE values: ", model.score(X,Y))
     if debugFlag:
         print("P 0-5: ", P[0:5])
 
+    # Write the model to the file
+    modelFileName = modelName+".model"
+    joblib.dump(model,modelFileName)
     return P
-#end getPredictions
+#end genModel
 
 def writeResult(output,data,p):
     result = np.array(
@@ -111,19 +114,22 @@ def writeResult(output,data,p):
 #end writeResult
 
 # Start
-inputFileName = "PerfRun_TestData.csv"
-outputFileName = "PerfRun_TestResult.txt"
-modelName = "PerfRun"
+if len(sys.argv) > 1:
+    maxDepth = int(sys.argv[1])
+
+inputFileName = "PerfRun_TrainingData.csv"
+outputFileName = "PerfRun_TrainingRandomForest.txt"
+modelName = "PerfRandomForest"
 
 # All input columns - data types are strings, float and int
-testData = np.genfromtxt(
+trainData = np.genfromtxt(
     inputFileName,
     delimiter=',',
     names=True,
     dtype=("|U20",int,int,int,int,int,int,int,int)
 )
 if debugFlag:
-    print("testData 0: ", testData[0:5])
+    print("trainData 0: ", trainData[0:5])
 
-P = getPredictions(testData,perfCols,modelName)
-writeResult(outputFileName,testData,P)
+P = genModel(trainData,perfCols,modelName)
+writeResult(outputFileName,trainData,P)
