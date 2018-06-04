@@ -1,10 +1,10 @@
 #######################################################
 # Script:
-#    trainDecisionTree.py
+#    testDecisionTree.py
 # Usage:
-#    python trainDecisionTree.py
+#    python testDecisionTree.py
 # Description:
-#    Build the prediction model based on training data
+#    Test the prediction model using test data set
 # Authors:
 #    Jackie Chu,   cchu@salesforce.com
 #    Jasmin Nakic, jnakic@salesforce.com
@@ -46,7 +46,7 @@ def addColumns(dest, src, colNames):
     return np.append(dest,tmpArr,1)
 #end addColumns
 
-def genModel(data,colList,modelName):
+def getPredictions(data,colList,modelName):
     # Prepare the data for the model
     X = np.zeros(data.shape[0])
     X = np.reshape(X,(-1,1))
@@ -57,11 +57,8 @@ def genModel(data,colList,modelName):
     if debugFlag:
         print("Y 0: ", Y[0:5])
 
-    # Build the model based on training data
-    model = tree.DecisionTreeClassifier()
-    if maxDepth > 0 :
-        model.set_params(max_depth=maxDepth)
-    print(model.fit(X, Y))
+    modelFileName = modelName+".model"
+    model = joblib.load(modelFileName)
 
     print("NAMES: ", data.dtype.names)
     print("TREE: ", model.tree_)
@@ -71,26 +68,14 @@ def genModel(data,colList,modelName):
     print("CHILDREN_RIGHT: ", model.tree_.children_left)
     print("FEATURE: ", model.tree_.feature)
     print("THRESHOLD: ", model.tree_.threshold)
-    print("SCORE values: ", model.score(X,Y))
 
     P = model.predict(X)
+    print("SCORE values: ", model.score(X,Y))
     if debugFlag:
         print("P 0-5: ", P[0:5])
 
-    # Visualize the decision tree model
-    dot_data = tree.export_graphviz(model, out_file=None, 
-                         feature_names=graphCols,
-                         class_names=targetVals,
-                         filled=True, rounded=True,  
-                         special_characters=True) 
-    graph = graphviz.Source(dot_data) 
-    graph.render(modelName) 
-
-    # Write the model to the file
-    modelFileName = modelName+".model"
-    joblib.dump(model,modelFileName)
     return P
-#end genModel
+#end getPredictions
 
 def writeResult(output,data,p):
     result = np.array(
@@ -126,22 +111,19 @@ def writeResult(output,data,p):
 #end writeResult
 
 # Start
-if len(sys.argv) > 1:
-    maxDepth = int(sys.argv[1])
-
-inputFileName = "PerfRun_TrainingData.csv"
-outputFileName = "PerfRun_TrainingResult.txt"
+inputFileName = "PerfRun_TestData.csv"
+outputFileName = "PerfRun_TestResult.txt"
 modelName = "PerfRun"
 
 # All input columns - data types are strings, float and int
-trainData = np.genfromtxt(
+testData = np.genfromtxt(
     inputFileName,
     delimiter=',',
     names=True,
     dtype=("|U20",int,int,int,int,int,int,int,int)
 )
 if debugFlag:
-    print("trainData 0: ", trainData[0:5])
+    print("testData 0: ", testData[0:5])
 
-P = genModel(trainData,perfCols,modelName)
-writeResult(outputFileName,trainData,P)
+P = getPredictions(testData,perfCols,modelName)
+writeResult(outputFileName,testData,P)
