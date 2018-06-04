@@ -23,6 +23,7 @@ pip install graphviz
 conda install graphviz
 ```
 (If conda is not found - try /anaconda3/bin/conda)
+* [More Info About Graphviz](http://www.graphviz.org/)
 
 ```
 pip install -U scikit-learn
