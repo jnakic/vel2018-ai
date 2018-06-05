@@ -21,6 +21,18 @@ conda install graphviz
 (If conda is not found - try /anaconda3/bin/conda)
 * [More Info About Graphviz](http://www.graphviz.org/)
 
+## Getting Ready for the Tutorial
+
+- Launch Anaconda through GUI
+- Launch Jupyter Notebook
+![thumb](https://github.com/sfperfdemo/vel2018-ai/blob/master/image/launchJupyter.png)
+
+- Download the zip of this repository
+![thumb](https://github.com/sfperfdemo/vel2018-ai/blob/master/image/gitDownload.png)
+
+- Unzip the download
+- In Jupyter Notebook, navigate to the directory, open the "scripts" folder
+![thumb](https://github.com/sfperfdemo/vel2018-ai/blob/master/image/openScript.png)
 
 
 ## Additional Information for Salesforce Wave Users
