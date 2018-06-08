@@ -1,7 +1,8 @@
-scripts/.ipynb_checkpoints/*
+Source.gv*
+*.ipynb_checkpoints*
 .ipynb_checkpoints/*
-*.txt
-scripts/PerfRandomForest
-scripts/PerfRandomForest.*
-scripts/PerfRun
-scripts/PerfRun.*
+*Result.txt
+PerfRandomForest
+PerfRandomForest.*
+PerfRun
+PerfRun.*
