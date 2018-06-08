@@ -37,4 +37,4 @@ conda install graphviz
 
 ## Additional Information for Salesforce Wave Users
 
-Salesforce customers can use Salesforce Wave for visualization and dashboards. For more information how to load predictive data into Wave, please click [here](https://github.com/sfperfdemo/df2016-ml-wave).
+Salesforce customers can use Salesforce Wave for visualization and dashboards. For more information how to load predictive data into Wave, please click [here](https://github.com/sfperfdemo/df2017-detect).
