@@ -1,7 +1,7 @@
 Source.gv*
 *.ipynb_checkpoints*
 .ipynb_checkpoints/*
-*Result.txt
+PerfRun*.txt
 PerfRandomForest
 PerfRandomForest.*
 PerfRun
