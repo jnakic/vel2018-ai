@@ -35,6 +35,6 @@ conda install graphviz
 ![thumb](https://github.com/sfperfdemo/vel2018-ai/blob/master/image/openScript.png)
 
 
-## Additional Information for Salesforce Wave Users
+## Additional Information for Salesforce Einstein Analytics Users
 
-Salesforce customers can use Salesforce Wave for visualization and dashboards. For more information how to load predictive data into Wave, please click [here](https://github.com/sfperfdemo/df2016-ml-wave).
+Salesforce customers can use Salesforce Einstein Analytics for visualization and dashboards. For more information how to load predictive data into Einstein Analytics, please click [here](https://github.com/sfperfdemo/df2017-detect).
