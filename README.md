@@ -1,6 +1,9 @@
 # vel2018-ai
 Velocity 2018 Tutorial
 
+## Slide deck
+* [Google slide](https://docs.google.com/presentation/d/1j0mc3P2I9Fxp35TWgC-rHLUSjbeokFPqv7tqguyBuHc/edit?usp=sharing)
+
 ## Prerequisites
 
 ### Anaconda
