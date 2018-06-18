@@ -38,6 +38,14 @@ conda install graphviz
 ![thumb](https://github.com/sfperfdemo/vel2018-ai/blob/master/image/openScript.png)
 
 
+## Exercise #1 - Classification
+1) trainDecisionTree
+2) testDecisionTree
+3) trainRandomForest
+4) testRandomForest
+
+## Exercise #2 - Trend Prediction
+
 ## Additional Information for Salesforce Einstein Analytics Users
 
 Salesforce customers can use Salesforce Einstein Analytics for visualization and dashboards. For more information how to load predictive data into Einstein Analytics, please click [here](https://github.com/sfperfdemo/df2017-detect).
